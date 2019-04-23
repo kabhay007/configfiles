@@ -32,8 +32,6 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-dispatch'
 
-
-
 call plug#end()
 
 " Turn on syntax highlighting
@@ -108,11 +106,6 @@ nmap <leader><Tab> : <leader>t
 set t_Co=256
 " for vim 8
 colorscheme codedark
-"colorscheme monokai
-
-"Easy edit/open commands
-"command EditVim :edit ~/.vimrc
-"command EditZsh :edit ~/.zshrc
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
