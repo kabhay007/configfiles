@@ -38,6 +38,8 @@ set title
 set ignorecase smartcase " make searches case-sensitive only if they contain upper-case charactersj
 set history=1000
 set backspace=indent,eol,start
+set splitright " Split to right window by default
+set laststatus=2
 
 " Encoding
 set encoding=utf-8 " Sets default encoding vim uses for a file to be utf-8
@@ -50,7 +52,7 @@ nnoremap <leader>; :bp<CR>
 nmap <leader>q :TagbarToggle<CR>
 
 " Nerdtree settings
-map <C-o> :NERDTreeToggle<CR>
+" map <C-o> :NERDTreeToggle<CR>
 
 " Config file for Rubocop
 let g:vimrubocop_config = '/Users/abhay/Work/novicap/novicap/.rubocop.yml'
@@ -67,3 +69,18 @@ nnoremap <leader>f :FZF<CR>
 
 " Makes Ack faster. (https://github.com/ggreer/the_silver_searcher)
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" In editor shortcuts to run rspec test
+nnoremap <leader>al :execute ':vert term bin/spring rspec %:' . line('.')<CR>
+nnoremap <leader>a :execute ':vert term bin/spring rspec %' <CR>
+
+" Abbreviations
+ab Cdr CompanyDebtorRelationship
+ab Pry require "pry"; binding.pry
+"
+
+" Copy paste
+vnoremap <leader>c "*y
+
+" Ack search shortcut
+nnoremap :S :Ack!<Space>

@@ -70,6 +70,10 @@ plugins=(
     rake
     rbenv
     ruby
+    vi-mode
+    fzf
+    zsh_reload
+    zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -105,9 +109,13 @@ export LANG=en_US.UTF-8
 export CHAMBER_NO_PATHS=1
 export FZF_DEFAULT_OPTS='--height 40% --border'
 
-alias rconsole='zeus console-development'
-alias vimf='vim $(fzf)'
+alias rconsole='bin/spring rails console'
+alias vf='vim $(fzf)'
 alias git_pull_diff='git log -p -1'
+
+function g-reset() {
+	git reset --soft HEAD~$1
+}
 
 function re {
   echo ♻
@@ -116,22 +124,20 @@ function re {
     tell application "iTerm2"
       set t to (create window with default profile)
       tell current session of t
-        write text "cd Work/novicap/novicap/"
         write text "foreman start -f Procfile.prydev"
       end tell
     end tell
 END
-  zeus server
+  bin/spring rails server
 }
 
 function restore_latest {
   echo 'Downloading latest backup from preproduction...'
-  file="$(chamber exec preproduction -- bundle exec rake backups:download_latest)"
+  file="$(~/go/bin/chamber exec preproduction -- bundle exec rake backups:download_latest)"
   echo "Restoring ${file} to development..."
-  zeus rake backups:restore file="$file"
-  zeus rake db:migrate
-  zeus rake staging:prepare
+  bin/spring rake backups:restore file="$file"
+  bin/spring rake db:migrate
+  bin/spring rake staging:prepare
 }
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
